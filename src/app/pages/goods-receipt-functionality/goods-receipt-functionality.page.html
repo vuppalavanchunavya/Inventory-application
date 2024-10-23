@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Docs 2 Receive</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-down-outline"
+      refreshingSpinner="bubbles"
+      pullingText="Pull to refresh"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  
+    <ion-card class="search-card">
+        <ion-card-content>
+          <app-search 
+            *ngIf="isSearchVisible" 
+            [placeholder]="'Doc#'" 
+            [searchKey]="'ponumber'" 
+            (search)="onSearch($event)">
+          </app-search>
+    
+          <ion-button fill="clear" (click)="toggleSearch()" slot="end">
+            <ion-icon slot="icon-only" name="search-outline"></ion-icon>
+          </ion-button>
+      
+      <ion-button fill="clear" (click)="BarcodeScan()" size="large">
+        <ion-icon name="scan-circle-outline" color="primary"></ion-icon>
+      </ion-button>
+      
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list class="po-list">
+    <ion-item *ngFor="let po of list; trackBy: trackByPoNumber" lines="none" class="po-item">
+      <ion-card class="po-card" color="light" (click)="navigateToItemsPage(po.poNumber)">
+        <ion-card-content class="po-card-content">
+          <div class="po-header">
+            <span class="po-number">{{ po.poNumber }}</span>
+            <span class="po-type">{{ po.poType }}</span>
+            <span class="item-count">{{ poNumberCount[po.poNumber] }} {{ poNumberCount[po.poNumber] > 1 ? 'Items' : 'Item' }}</span>
+          </div>
+          <div class="vendor-name">
+            {{ po.vendorName || 'N/A' }}
+          </div>
+        </ion-card-content>
+        <div class="po-card-footer">
+          <p class="po-date">{{ po.needByDate || 'N/A' }}</p>
+          <p class="requestor">{{ po.requestor || 'N/A' }}</p>
+        </div>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+  
+  <ion-infinite-scroll 
+  threshold="10px"
+   position="bottom" 
+   (ionInfinite)="loadMoreData($event)">
+    <ion-infinite-scroll-content 
+      loadingSpinner="bubbles" 
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

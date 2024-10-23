@@ -1,0 +1,113 @@
+
+ion-header {
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  margin: 0;
+}
+
+ion-toolbar {
+  --background: #2c3e50;
+  padding: 0;
+  margin: 0;
+}
+
+
+
+.search-card {
+  margin: 0 0 10px 0;
+  --border-radius: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.search-card ion-card-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+
+
+.po-card {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); 
+  border-radius: 8px; 
+  background-color: #ffffff; 
+  margin-bottom: 10px; 
+}
+
+
+ion-card {
+  margin: 8px 0;
+  border-radius: 5px;
+  box-shadow: none;
+  width: 100%;
+  --background: #fff;
+}
+
+.po-card-content {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 12px;
+}
+
+
+.po-header {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.po-number {
+  background-color: blue;
+  color: white;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 12px;
+  margin-right: 15px; 
+  flex-shrink: 0; 
+}
+
+.po-type {
+  flex: 1; 
+  text-align: left;
+  font-weight: bold;
+  margin-left: auto; 
+}
+
+
+.item-count {
+  font-size: 0.9em;
+  color: #666;
+}
+
+.vendor-name {
+  font-size: 0.9em;
+  color: #333;
+}
+
+
+
+.po-card-footer {
+  display: flex;
+  justify-content: space-between; 
+  background-color: #87cefa; 
+  padding: 2px 4px; 
+  border-radius: 3px; 
+  font-size: 0.75em; 
+  height: 30px; 
+  box-sizing: border-box; 
+}
+
+.po-date {
+  
+  margin-right: 8px; 
+  white-space: nowrap;
+}
+
+.requestor {
+  
+  white-space: nowrap; 
+}

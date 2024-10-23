@@ -1,0 +1,121 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title class="header-title">Activity Screen</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="syncAgain()" class="primary-button">Sync Again</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  
+  <ion-card class="new-border slideIn">
+    <ion-row>
+      <ion-col size="2" class="icon-position">
+        <ion-icon name="checkmark-circle" class="font-30 color-green"></ion-icon>
+      </ion-col>
+      <ion-col size="10">
+        <ion-row>
+          <ion-col>
+            <p class="success">Login successful [Kiran Logged In]</p>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="responsibility && responsibility.length > 0">
+          <ion-col>
+            <p class="success">Assigned Responsibilities:</p>
+            <ul class="no-style-list">
+              <li *ngFor="let resp of responsibility" >{{ resp }}</li>
+            </ul>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+  
+  <ion-card class="new-border slideIn">
+    <ion-row>
+      <ion-col size="2" class="icon-position">
+        <ion-icon name="checkmark-circle" class="font-30 color-green"></ion-icon>
+      </ion-col>
+      <ion-col size="10">
+        <ion-row>
+          <ion-col>
+            <p class="success">Initial Data Download ...</p>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+  
+  <ion-card class="new-border slideIn" *ngIf="loadingQueue">
+    <ion-row>
+      <ion-col size="2" class="icon-position">
+        <ion-spinner name="bubbles" class="font-30"></ion-spinner>
+      </ion-col>
+      <ion-col size="10">
+        <p class="loading">Updating </p>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+  
+  <app-activity-card
+    *ngFor="let card of activityCards"
+    [loading]="card.isLoading"
+    [status]="card.status"
+    [module]="card.responsibility"
+    [count]="card.count">
+  </app-activity-card>
+
+  
+  <ion-card class="new-border slideIn" *ngIf="finishedSync || showOfflineData">
+    <ion-row>
+      <ion-col size="2" class="icon-position">
+        <ion-icon name="checkmark-circle" class="font-30 color-green"></ion-icon>
+      </ion-col>
+      <ion-col size="10">
+        <ion-row *ngIf="finishedSync">
+          <ion-col>
+            <p class="success">Finished data loading</p>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="showOfflineData">
+          <ion-col>
+            <p class="success">
+              All Transactional data downloaded successfully.
+            </p>
+          </ion-col>
+          <ion-col>
+            <p class="success">Congratulations! All set to go!</p>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+  
+  <div *ngIf="errorArray.length > 0">
+    <ion-card class="new-border slideIn">
+      <ion-row>
+        <ion-col size="2" class="icon-position">
+          <ion-icon name="close-circle" class="font-30 color-red"></ion-icon>
+        </ion-col>
+        <ion-col size="10">
+          <ion-row *ngFor="let er of errorArray">
+            <ion-col class="error">{{ er.responsibility }}</ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+    <ion-row text-center *ngIf="finishedSync">
+      <ion-col>
+        <div class="ion-text-center primary-button-holder sticky-button">
+          
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

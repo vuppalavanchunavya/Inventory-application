@@ -1,0 +1,32 @@
+
+ion-toolbar[color="primary"] {
+  --background: #007bff; 
+}
+
+
+.header-title {
+  color: #ffffff; 
+}
+
+
+ion-back-button {
+  --color: #ffffff; 
+}
+
+
+.no-style-list {
+  list-style-type: none; 
+  padding-left: 0;       
+  margin: 0;            
+}
+
+
+ion-button {
+  --padding-start: 0;
+  --padding-end: 0;
+}
+
+ion-icon {
+  font-size: 1.5rem; 
+  color: #ffffff;    
+}

@@ -1,0 +1,28 @@
+.card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-body {
+    font-size: 16px;
+  }
+  
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .card-text {
+    margin: 5px 0;
+  }
+  .scanner-active {
+    background-color: rgba(0, 0, 0, 0.9); 
+  }
+  
+  .scanner-active ion-content {
+    visibility: hidden; 
+  }
+  

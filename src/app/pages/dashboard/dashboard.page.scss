@@ -1,0 +1,32 @@
+ion-header {
+    background-color: #007bff; 
+  }
+  
+  ion-toolbar {
+    --background: #007bff; 
+  }
+  
+  ion-title {
+    color: white; 
+  }
+ion-card {
+    width: 100%;
+    height: 150px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  ion-card-header,
+  ion-card-content {
+    padding: 10px; 
+  }
+  
+  ion-card-title {
+    font-size: 1.2rem; 
+  }
+  
+  ion-card-subtitle {
+    font-size: 0.9rem; 
+  }
+  

@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar class="header-toolbar">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()" fill="clear">
+        <ion-icon name="arrow-back" class="back-icon"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ itemNumber }} - Lots</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card class="info-card">
+    <ion-card-content>
+      <h4>PO#: {{ poNumber }}</h4>
+      <p>{{ itemDesc }}</p>
+      <div class="flex-container">
+        <span class="quantity-label">{{ quantity }} Ea</span>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <div *ngFor="let lot of lots; let i = index">
+    <ion-card class="lot-input-card">
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="floating">Lot1Qty (Ea)</ion-label>
+          <ion-input type="number" [(ngModel)]="lot.lotQty"></ion-input>
+        </ion-item>
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">Lot</ion-label>
+            <ion-input type="text" [(ngModel)]="lot.selectedLot"></ion-input>
+            <ion-icon name="chevron-forward-outline" slot="end" (click)="showChildLots(i)"></ion-icon>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <ion-button expand="block" (click)="addMore()">Add More</ion-button>
+
+  <ion-footer class="ion-no-border">
+    <ion-button expand="block" color="primary" [disabled]="isDoneButtonEnabled()" (click)="done()">DONE</ion-button>
+  </ion-footer>
+</ion-content>

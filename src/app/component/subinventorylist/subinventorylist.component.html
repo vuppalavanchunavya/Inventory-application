@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Select Sub-Inventory</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-search
+    [placeholder]="'Search by SubInventoryCode'"
+    (search)="onSearch($event.query)">
+  </app-search>
+  
+  <ion-list>
+    <ion-item *ngFor="let subInventory of filteredSubInventories" (click)="selectSubInventory(subInventory)">
+      <ion-label>
+        <p>{{ subInventory.SubInventoryCode }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

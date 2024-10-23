@@ -1,0 +1,64 @@
+.header-toolbar {
+  --background: #3880ff; 
+}
+
+.header-toolbar ion-title {
+  color: white; 
+}
+  
+  .back-icon {
+    color: white; 
+  }
+  
+  .info-card {
+    margin-bottom: 16px;
+    background-color: #f8f9fa; 
+  }
+  
+  h4 {
+    margin: 0; 
+    color: #007bff; 
+  }
+  
+  p {
+    margin: 0; 
+    color: #666; 
+  }
+  
+  .quantity-card {
+   
+    margin: 10px 0;
+  }
+  
+  ion-item {
+    margin-bottom: 0; 
+  }
+  
+  
+  
+  ion-row {
+    display: flex;
+  }
+  .flex-container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: right; 
+  }
+  
+  .quantity-label {
+    font-weight: bold; 
+  }
+  .serial-table {
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  .table-cell {
+    width: 33%;
+    padding: 0 8px; 
+  }
+  
+  ion-item {
+    --inner-padding-end: 0px; 
+  }
+  

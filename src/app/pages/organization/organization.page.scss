@@ -1,0 +1,52 @@
+ion-header {
+  background-color: #007bff; 
+}
+
+ion-toolbar {
+  --background: #007bff; 
+}
+
+ion-title {
+  color: white; 
+}
+
+ion-item.selected {
+  background-color: #e0f7fa; 
+}
+
+.checkmark-icon {
+  font-size: 24px; 
+  margin-right: 10px; 
+}
+
+ion-item {
+  --padding-start: 16px; 
+}
+
+ion-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h2 {
+  margin: 0;
+  font-size: 1.2rem; 
+}
+
+p {
+  margin: 0;
+  font-size: 1rem; 
+}
+.white-back-button {
+  --background: transparent;
+  --color: white; 
+  --padding-start: 16px;
+  --padding-end: 16px;
+}
+
+.white-icon {
+  color: white; 
+  font-size: 32px; 
+}
+

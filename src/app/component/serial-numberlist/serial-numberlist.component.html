@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Related Serials</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ 
+  <app-search
+    placeholder="Search by Serial Number"
+    searchKey="SerialNumber"
+    (search)="filterSerials($event)">
+  </app-search>
+
+  
+  <ion-item button *ngFor="let serial of filteredSerials" (click)="selectSerial(serial.SerialNumber)">
+    {{ serial.SerialNumber }}
+  </ion-item>
+  
+</ion-content>

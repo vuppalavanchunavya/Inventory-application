@@ -1,0 +1,66 @@
+<ion-header> 
+  <ion-toolbar class="header-toolbar">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()" fill="clear">
+        <ion-icon name="arrow-back" class="back-icon"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ itemNumber }} - Serial</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card class="info-card">
+    <ion-card-content>
+      <h4>PO#: {{ poNumber }}</h4>
+      <p>{{ itemDesc }}</p>
+      <div class="flex-container">
+        <span class="quantity-label">{{ initialQuantity }} Ea</span> 
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-item>
+    <ion-label position="stacked">Serial#</ion-label>
+    <ion-input placeholder="Scan Serial" [(ngModel)]="serialInput" (ngModelChange)="checkInput()"></ion-input>
+    <ion-icon name="chevron-forward-outline" slot="end" (click)="showRelatedSerials()"></ion-icon>
+  </ion-item> 
+
+  <ng-container *ngFor="let serialEntry of serialEntries; let i = index">
+    <ion-card class="quantity-card">
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="stacked">Serial Info</ion-label>
+          <table class="serial-table">
+            <tr>
+              <td class="table-cell">
+                <ion-item>
+                  <ion-label position="stacked">Min Serial</ion-label>
+                  <ion-input placeholder="Min Serial" [(ngModel)]="serialEntries[i].minSerial" (ngModelChange)="checkInput()"></ion-input>
+                </ion-item>
+              </td>
+              <td class="table-cell">
+                <ion-item>
+                  <ion-label position="stacked">Max Serial</ion-label>
+                  <ion-input placeholder="Max Serial" [(ngModel)]="serialEntries[i].maxSerial" (ngModelChange)="checkInput()"></ion-input>
+                </ion-item>
+              </td>
+              <td class="table-cell">
+                <ion-item>
+                  <ion-label position="stacked">Qty</ion-label>
+                  <ion-input placeholder="Qty" type="number" [(ngModel)]="serialEntries[i].quantity" (ngModelChange)="checkInput()"></ion-input>
+                </ion-item>
+              </td>
+            </tr>
+          </table>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+  
+
+  <ion-footer class="ion-no-border">
+    <ion-button expand="block" color="primary" [disabled]="isDoneButtonEnabled()" (click)="done()">DONE</ion-button>
+  </ion-footer>
+</ion-content>

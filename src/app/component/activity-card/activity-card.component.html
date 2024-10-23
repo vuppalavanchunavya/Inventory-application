@@ -1,0 +1,31 @@
+<ion-card
+  class="new-border slideIn"
+  [ngClass]="{ 'loading': loading, 'success': status === true }"
+>
+  
+  <ion-row *ngIf="loading">
+    <ion-col size="2" class="icon-position">
+      <ion-spinner name="bubbles" class="font-30"></ion-spinner>
+    </ion-col>
+    <ion-col size="10">
+      <p class="loading">Downloading {{ module }}...</p>
+    </ion-col>
+  </ion-row>
+
+  
+  <ion-row *ngIf="!loading && status === true">
+    <ion-col size="2" class="icon-position">
+      <ion-icon name="checkmark-circle" class="font-30 color-green"></ion-icon>
+    </ion-col>
+    <ion-col size="10">
+      <ion-row>
+        <ion-col>
+          <p class="success">
+            <span class="large-font">{{ count }}</span> {{ module }}
+          </p>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  
+</ion-card>

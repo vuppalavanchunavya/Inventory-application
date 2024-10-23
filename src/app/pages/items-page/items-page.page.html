@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="navigateBack()">
+        <ion-icon name="chevron-back-outline" class="white-icon"></ion-icon>
+      </ion-button>
+      <ion-button (click)="navigateHome()">
+        <ion-icon slot="icon-only" name="home"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Order #{{ poNumber }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="details">
+    <ion-card-content>
+      <p><strong>PO Type:</strong> {{ details.poType || 'Not Available' }}</p>
+      <p><strong>Vendor Name:</strong> {{ details.vendorName || 'Not Available' }}</p>
+      <p><strong>Need By Date:</strong> {{ details.needByDate || 'Not Available' }}</p>
+      <p><strong>Requestor:</strong> {{ details.requestor || 'Not Available' }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-item>
+    <ion-label position="floating">Search by Item Number</ion-label>
+    <div style="display: flex; align-items: center; width: 100%;">
+      <ion-input [(ngModel)]="searchTerm" (ionInput)="filterItems()" placeholder=""></ion-input>
+      <ion-icon slot="end" name="search-outline" style="font-size: 24px; margin-left: -36px;"></ion-icon>
+      <ion-button fill="clear" (click)="BarcodeScan()" size="large" style="margin-left: 10px;">
+        <ion-icon name="scan-circle-outline" color="primary" style="font-size: 24px;"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-item>
+
+  <ion-list *ngIf="filteredItems.length > 0; else noItems">
+    <ion-card *ngFor="let item of filteredItems" (click)="navigateToItemDetails(item)">
+      <ion-card-header>
+        <ion-card-title>
+          {{ item.ItemNumber || 'No Item Number' }}
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-label>
+          <p><strong>Description:</strong> {{ item.ItemDesc || 'No Description' }}</p>
+          <p><strong>Shipment Line Number:</strong> {{ item.ShipmentLineNum || 'N/A' }}</p>
+          <p><strong>Delivery Date:</strong> {{ item.DeliveryDate || 'N/A' }}</p>
+          <p><strong>Quantity Ordered:</strong> {{ item.QtyOrdered || 0 }}</p>
+        </ion-label>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+  
+  <ng-template #noItems>
+    <ion-item>
+      <ion-label>No items available</ion-label>
+    </ion-item>
+  </ng-template>
+</ion-content>

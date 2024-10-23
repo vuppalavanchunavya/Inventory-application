@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="navigateBack()">
+        <ion-icon name="chevron-back-outline" class="white-icon"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Trans History</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="SyncData()">
+        <ion-icon name="sync-circle-outline" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+  
+  <ion-card *ngFor="let transaction of tableData">
+    <ion-card-header>
+      <ion-card-title>Po# {{ transaction.poNumber }}</ion-card-title>
+      <ion-card-subtitle>Item# {{ transaction.itemNumber }}</ion-card-subtitle>
+      <ion-card-subtitle>Shipment# {{ transaction.shipLaneNum }}</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <p *ngIf="transaction.receiptInfo">Receipt No: {{ transaction.receiptInfo }}</p>
+      <p *ngIf="transaction.error">Error: {{ transaction.error }}</p>
+      <p [ngClass]="{
+        'local-status': transaction.status === 'local',
+        'success-status': transaction.status === 'S',
+        'error-status': transaction.status === 'E'
+      }">
+        Status: 
+        {{ transaction.status === 'local' ? 'Local' : transaction.status === 'S' ? 'Success' : transaction.status === 'E' ? 'Error' : 'Unknown' }}
+      </p>
+  
+      <!-- Delete button -->
+      <ion-icon name="trash-outline" (click)="deleteTransaction(transaction.id)" size="medium"></ion-icon> 
+    </ion-card-content>
+  </ion-card>
+  
+</ion-content>

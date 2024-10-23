@@ -1,0 +1,114 @@
+ <ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="navigateBack()">
+        <ion-icon name="chevron-back-outline" class="white-icon"></ion-icon>
+      </ion-button>
+      <ion-button (click)="navigateHome()">
+        <ion-icon slot="icon-only" name="home"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Order #{{ poNumber }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" fullscreen>
+  <ion-grid class="full-height-grid">
+    <ion-row class="full-height-row">
+      <ion-col size="12">
+        <ion-card class="full-height-card">
+          <ion-card-content class="card-content">
+            <div class="title-container">
+              <div class="item-title">{{ item?.ItemNumber || 'No Item Number Available' }}</div>
+              <div class="item-description">{{ item?.ItemDesc || 'No Description Available' }}</div>
+            </div>
+
+            <div class="details">
+              <div class="detail-item">
+                <strong>Qty Ordered:</strong> {{ item?.QtyOrdered || 'N/A' }} Ea
+              </div>
+              <div class="detail-item">
+                <strong>Qty Remaining:</strong> {{ item?.QtyRemaining || 'N/A' }} Ea
+              </div>
+              <div class="detail-item">
+                <strong>Quantity Received:</strong> {{ item?.QtyOrdered - item?.QtyRemaining }} Ea
+              </div>
+
+              <div class="detail-item" *ngIf="shipmentNumber">
+                <strong>Shipment #:</strong> {{ shipmentNumber }}
+              </div>
+
+              <div class="detail-item">
+                <strong>Quantity Rec:</strong>
+                <ion-input 
+                  [(ngModel)]="inputQuantity" 
+                  placeholder="Enter quantity" 
+                  type="number" 
+                  (ionChange)="changeQuantity($event)">
+                </ion-input>
+                
+                <div *ngIf="quantityExceedsTolerance" class="warning">
+                  <ion-text color="danger">
+                    Entered quantity exceeds the tolerance limit of {{ item?.QtyTolerance || 'N/A' }} Ea!
+                  </ion-text>
+                </div>
+              </div>
+              
+            </div>
+
+            <div *ngIf="destinationType === 'Inventory'" class="input-box">
+              <div class="detail-item">
+                <strong>Sub Inv:</strong>
+                <ion-input [(ngModel)]="inputSubInventory" placeholder="Enter sub-inventory" 
+                           [disabled]="hasDefaultSubInventory()" class="small-input"></ion-input>
+                <ion-button fill="clear" (click)="showSubInventoryList()" [disabled]="hasDefaultSubInventory()">
+                  <ion-icon name="chevron-forward-outline"></ion-icon>
+                </ion-button>
+                <div *ngIf="selectedSubInventoryCode || item?.DefaultSubInventoryCode">
+                  <strong>Code:</strong> {{ selectedSubInventoryCode || item?.DefaultSubInventoryCode }}
+                </div>
+              </div>   
+
+              
+              <div class="detail-item">
+                <strong>Locator:</strong>
+                <ion-input [(ngModel)]="inputLocator" placeholder="Enter locator" 
+                           [disabled]="hasDefaultLocator()" class="small-input"></ion-input>
+                <ion-button fill="clear" (click)="showLocatorList()" [disabled]="hasDefaultLocator()">
+                  <ion-icon name="chevron-forward-outline"></ion-icon>
+                </ion-button>
+                <div *ngIf="(inputLocator || item?.DefaultLocator) && item?.DefaultSubInventoryCode">
+                  <strong>Locator:</strong> {{ inputLocator || item?.DefaultLocator }}
+                </div>
+              </div>
+
+              <div *ngIf="isLotControlled" class="detail-item">
+                <strong>Lot:</strong> 
+                <span *ngIf="selectedLotCount > 0">{{ selectedLotCount }} lot(s) selected</span>
+                <ion-button fill="clear" (click)="showLotList()">
+                  <ion-icon name="chevron-forward-outline"></ion-icon>
+                </ion-button>
+              </div>
+
+              <div *ngIf="isSerialControlled" class="detail-item">
+                <strong>Serial:</strong> 
+                <span *ngIf="selectedSerialCount > 0">{{ selectedSerialCount }} serial(s) selected</span>
+                <ion-button fill="clear" (click)="showSerialList()">
+                  <ion-icon name="chevron-forward-outline"></ion-icon>
+                </ion-button>
+              </div>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="block" (click)="receiveAndPrint()" class="receive-print-btn">
+      Receive + Print
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

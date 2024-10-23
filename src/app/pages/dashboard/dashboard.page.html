@@ -1,0 +1,72 @@
+
+<ion-menu side="start" contentId="main-content" type="overlay">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>KIRAN R</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      
+      <ion-item routerLink="/dashboard">
+        <ion-icon name="home-outline" slot="start"></ion-icon>
+        <ion-label>Home</ion-label>
+      </ion-item>
+      <ion-item [routerLink]="['/organization']">
+        <ion-icon name="cube-outline" slot="start"></ion-icon>
+        <ion-label>Organization</ion-label>
+      </ion-item>      
+      <ion-item routerLink="/activity">
+        <ion-icon name="refresh-outline" slot="start"></ion-icon>
+        <ion-label>Refresh On hand Qty</ion-label>
+      </ion-item>
+      <ion-item routerLink="/data-maintenance">
+        <ion-icon name="build-outline" slot="start"></ion-icon>
+        <ion-label>Data Maintenance</ion-label>
+      </ion-item>
+      <ion-item (click)="logout()">
+        <ion-icon name="log-out-outline" slot="start"></ion-icon>
+        <ion-label>Logout</ion-label>
+      </ion-item>
+      <ion-item (click)="logoutAndClearData()">
+        <ion-icon name="trash-bin-outline" slot="start"></ion-icon>
+        <ion-label>Logout + Clear Data</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+
+<ion-router-outlet id="main-content"></ion-router-outlet>
+
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button> 
+    </ion-buttons>
+    <ion-title>{{selectedOrganization}} Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      
+      <ion-col size="6" *ngIf="goodsReceiptResp">
+        <ion-card (click)="goToGoodsReceipt()">
+          <ion-card-header>
+            <ion-card-title>Goods Receipt</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" *ngIf="goodsReceiptResp">
+        <ion-card (click)="goToTransactionHistory()">
+          <ion-card-header>
+            <ion-card-title>Transaction History</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,8 @@
+<ion-item>
+  <ion-input
+    [(ngModel)]="searchQuery"
+    [attr.placeholder]="placeholder"
+    (ionInput)="onSearch()">
+  </ion-input>
+  <ion-icon name="search" slot="end"></ion-icon>
+</ion-item>

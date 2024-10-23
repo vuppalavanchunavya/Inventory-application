@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Child Lots</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-search
+    placeholder="Search by childLot"
+    searchKey="childLot"
+    (search)="filterChildLots($event)">
+  </app-search>
+  <ion-list>
+    <ion-item *ngFor="let childLot of filteredChildLots" (click)="selectChildLot(childLot)">
+      <ion-label>
+        <p>{{ this.childLot }}</p> 
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
